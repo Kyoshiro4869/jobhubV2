@@ -1,4 +1,4 @@
-const Job = require('../models/Job');
+const Job = require('../models/jobs');
 
 module.exports = {
   createJob: async(req,res)=>{
@@ -52,6 +52,7 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+
   
   getAllJobs: async(req,res) =>{
     const recent = req.query.new;
@@ -73,9 +74,20 @@ module.exports = {
 
   searchJobs: async(req,res) =>{
     try{
-      const results = await Job.aggregate([
-
+      const results = await Job.aggregate([        
+          {
+            $search: {
+              index: "Jobsearch",
+              text: {
+                query: req.params.key,
+                path: {
+                  wildcard: "*"
+                }
+              }
+            }
+          }       
       ])
+      res.status(200).json(results)
     } catch (error){
       res.status(500).json(error);
     }
