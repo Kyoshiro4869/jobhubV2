@@ -61,7 +61,7 @@ module.exports = {
       let jobs;
 
       if(recent){
-        jobs = await Job.findById({},{createdAt:0,updatedAt:0,__V:0}).sort({createdAt: -1}).limit(2)
+        jobs = await Job.find({},{createdAt:0,updatedAt:0,__V:0}).sort({createdAt: -1}).limit(2)
       }else{
         jobs = await Job.find({}, {createdAt:0, updatedAt:0,__V:0})
       }

@@ -25,6 +25,3 @@ app.use('/api/jobs',jobRouter);
 app.listen(port ,() => console.log(`The Hub is listening on port ${port}!`));
 
 
-app.get('/api/jobs',(req,res) =>{
-    res.send("aaa");
-} )
