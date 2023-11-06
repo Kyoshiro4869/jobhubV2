@@ -5,8 +5,13 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const jobRouter = require('./routes/job');
 const bodyParser = require('body-parser');
+const authRouter = require('./routes/auth');
+const admin  = require('firebase-admin');
+const serviceAccount = require('./ServiceAccountKey.json');
 
-
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
 
 
 
@@ -19,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api/jobs',jobRouter);
-
+app.use('/api/',authRouter);
 
 
 app.listen(port ,() => console.log(`The Hub is listening on port ${port}!`));
