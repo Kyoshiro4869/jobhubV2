@@ -1,4 +1,4 @@
-const User = require('./models/User');
+const User = require('../models/User');
 const CryptJS = require('crypto-js');
 const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
