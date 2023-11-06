@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const CryptJS = require('crypto-js');
+const CryptoJS = require('crypto-js');
 const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 
@@ -29,13 +29,14 @@ module.exports = {
             uid:userResponse.uid,
             username:user.username,
             email:user.email,
-            password:CryptJS.AES.encrypt(user.password,process.env.SECRET).toString(),
+            password:CryptoJS.AES.encrypt(user.password, process.env.SECRET).toString(),
             //crypto-jsライブラリを使用してユーザーのパスワードを暗号化し、その他のユーザー情報と共に新しいUserモデルインスタンスを作成
 
           }) 
           await newUser.save();
           res.status(201).json({status:true})
         } catch (error){
+          console.error(error); 
           res.status(500).json({error: 'An error occured while creating account'})
         }
       }
@@ -77,4 +78,4 @@ module.exports = {
       res.status(500).json({error: 'An error occured while logining'})
     }
   }
-}
+};
