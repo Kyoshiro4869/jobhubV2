@@ -55,7 +55,7 @@ module.exports = {
         });
       }
 
-      const decryptedPassword = CryptJS.AES.decrypt(user.password, process.env.SECRET);
+      const decryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.SECRET);
       const depassword = decryptedPassword.toString(CryptoJS.enc.Utf8);
 
       if(depassword !== req.body.password){
@@ -73,8 +73,10 @@ module.exports = {
       
       const {password, isAdmin, ...others} = user._doc
 
-      res.status(200).json(...others,userToken)
+      res.status(200).json({ ...others, token: userToken });
+
     } catch (error){
+      console.error(error);
       res.status(500).json({error: 'An error occured while logining'})
     }
   }
