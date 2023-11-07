@@ -73,7 +73,7 @@ module.exports = {
       
       const {password, isAdmin, ...others} = user._doc
 
-      res.status(200).json({ ...others, token: userToken });
+      res.status(200).json({ ...others, token: userToken ,uid: user.uid});
 
     } catch (error){
       console.error(error);
