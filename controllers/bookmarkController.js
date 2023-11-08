@@ -7,7 +7,7 @@ module.exports = {
     const userId = req.user.id;
 
     try{
-      const job = await Job.findByIs(jobId);
+      const job = await Job.findById(jobId);
 
       if(!job){
         return res.status(400).json({message:'Job not found'});
