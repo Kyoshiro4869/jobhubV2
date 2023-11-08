@@ -1,5 +1,5 @@
 const Bookmark  = require('../models/Bookmark')
-const Job = require('../models/jobSchema')
+const Job = require('../models/jobschema')
 
 module.exports = {
   createBookmark:async(req,res) => {
