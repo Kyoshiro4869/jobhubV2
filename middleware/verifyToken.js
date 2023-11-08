@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 const verifyToken = (req, res ,next) =>{
   const authHeader = req.headers.authorization;
   if(authHeader){
-    const token = authHeader.spilt("");
+    const token = authHeader.spilt("")[1];
 
-    jwt.verify(token,process.env.JWT_SECRET,async(err,user) => {
+    jwt.verify(token,process.env.JWT_SEC,async(err,user) => {
       if(err){
         return res.status(401).json({message:"Invalid token"})
       }
