@@ -1,5 +1,5 @@
 const Bookmark  = require('../models/Bookmark')
-const Job = require('../models/Job')
+const Job = require('../models/jobSchema')
 
 module.exports = {
   createBookmark:async(req,res) => {
@@ -54,7 +54,7 @@ module.exports = {
   },
 
   getBookmark:async (req, res) => {
-    const jobId = req.params.jobId;
+    const jobId = req.params.id;
     const userId = req.user.id;
 
     try{

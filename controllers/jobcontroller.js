@@ -1,4 +1,4 @@
-const Job = require('../models/jobs');
+const Job = require('../models/jobschema');
 
 module.exports = {
   createJob: async(req,res)=>{
