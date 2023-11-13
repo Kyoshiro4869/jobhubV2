@@ -3,7 +3,7 @@ const Job = require('../models/jobschema')
 
 module.exports = {
   createBookmark:async(req,res) => {
-    const jobId = req.body.job;
+    const jobId = req.body.job; //BookmarkSchema
     const userId = req.user.id;
 
     try{
