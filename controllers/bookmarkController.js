@@ -6,10 +6,13 @@ module.exports = {
     const jobId = req.body.job; //BookmarkSchema
     const userId = req.user.id;
 
+    console.log('Received jobId: ', jobId);  // Add this line
+
     try{
       const job = await Job.findById(jobId);
 
       if(!job){
+        
         return res.status(400).json({message:'Job not found'});
       }
 
