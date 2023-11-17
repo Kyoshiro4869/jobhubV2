@@ -21,7 +21,7 @@ module.exports = {
     try{
       console.log('getUser function called'); // Debug log
       const profile = await User.findById(req.user.id)
-      const {password,createdAt,updatedAt,__v,...userData} = profile.doc;
+      const {password,createdAt,updatedAt,__v,...userData} = profile;
   
       console.log('User data retrieved: ', userData); // Debug log
       res.status(200).json(userData)
