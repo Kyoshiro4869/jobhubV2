@@ -6,7 +6,7 @@ const userController = require('../controllers/userController');
 
 router.get('/',verifyAndAuth,userController.getUser);
 
-router.delete('/:userId',verifyAndAuth,userController.deleteUser);
+router.delete('/:id',verifyAndAuth,userController.deleteUser);
 
 router.put('/',verifyAndAuth, userController.updateUser);
 
