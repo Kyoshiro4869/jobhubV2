@@ -6,7 +6,7 @@ const bookmarkController = require('../controllers/bookmarkController');
 
 router.post('/',verifyAndAuth,bookmarkController.createBookmark);
 
-router.delete('/:id',verifyAndAuth,bookmarkController.deleteBookmark);
+router.delete('/:bookmarkId',verifyAndAuth,bookmarkController.deleteBookmark);
 
 router.get('/',verifyAndAuth, bookmarkController.getAllBookmarks);
 router.get('/bookmark/:id',verifyAndAuth,bookmarkController.getBookmark);
