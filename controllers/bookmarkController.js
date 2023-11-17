@@ -33,16 +33,27 @@ module.exports = {
     },
 
 
-  deleteBookmark: async (req,res) => {
-    const bookmarkId = req.params.bookmarkId;
-    try{
-      await Bookmark.findByIdAndDelete(bookmarkId)
-
-      res.status(200).json({stauts: true,message:'Bookmark deleted'})
-    }catch(error){
-      res.status(500).json({message:error.message})
-    }
-  },
+    deleteBookmark: async (req, res) => {
+      const bookmarkId = req.params.bookmarkId;
+    
+      console.log('Received bookmarkId: ', bookmarkId); // リクエストパラメータの確認
+    
+      try {
+        const deletedBookmark = await Bookmark.findByIdAndDelete(bookmarkId);
+    
+        console.log('Deleted bookmark: ', deletedBookmark); // データベース操作の確認
+    
+        if (!deletedBookmark) {
+          return res.status(404).json({ message: 'Bookmark not found' });
+        }
+    
+        res.status(200).json({ status: true, message: 'Bookmark deleted' });
+      } catch (error) {
+        console.error('Error deleting bookmark: ', error.message); // エラーハンドリングの確認
+        res.status(500).json({ message: error.message });
+      }
+    },
+    
 
   getAllBookmarks: async (req, res) => {
     const userId = req.user.id;
