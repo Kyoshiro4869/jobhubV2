@@ -61,7 +61,7 @@ module.exports = {
   },
 
   deleteSkills: async(req,res) =>{
-    const  id = req.user.id;
+    const  id = req.params.id;
 
     try{
       await Skills.findByIdAndDelete(id)
