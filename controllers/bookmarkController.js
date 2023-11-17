@@ -2,31 +2,36 @@ const Bookmark  = require('../models/Bookmark')
 const Job = require('../models/jobschema')
 
 module.exports = {
-  createBookmark:async(req,res) => {
-    const jobId = req.body.job; //BookmarkSchema
-    const userId = req.user.id;
-
-    console.log('Received jobId: ', jobId);  // Add this line
-
-    try{
-      const job = await Job.findById(jobId);
-
-      if(!job){
-        
-        return res.status(400).json({message:'Job not found'});
+    createBookmark: async (req, res) => {
+      const jobId = req.body.job; // BookmarkSchema
+      const userId = req.user.id;
+  
+      console.log('Received jobId: ', jobId); // リクエストの受信をログに記録
+  
+      try {
+        console.log('Searching for job with ID: ', jobId); // ジョブ検索開始をログに記録
+        const job = await Job.findById(jobId);
+  
+        if (!job) {
+          console.log('Job not found for ID: ', jobId); // ジョブが見つからなかった場合のログ
+          return res.status(400).json({ message: 'Job not found' });
+        }
+  
+        console.log('Job found: ', job); // ジョブが見つかった場合のログ
+  
+        const newBookmark = new Bookmark({ job: jobId, userId: userId });
+  
+        console.log('Saving new bookmark...'); // ブックマーク保存開始をログに記録
+        const savedBookmark = await newBookmark.save();
+        console.log('Bookmark saved: ', savedBookmark); // 保存されたブックマークをログに記録
+  
+        return res.status(200).json({ status: true, bookmarkId: savedBookmark._id });
+      } catch (error) {
+        console.error('Error in createBookmark: ', error); // エラーをログに記録
+        return res.status(500).json({ message: error.message });
       }
+    },
 
-      const newBookmark = new Bookmark({job:jobId, userId:userId});
-
-      const saveBookmark = await newBookmark.save();
-
-      return res.status(200).json({status:true,bookmarkId:saveBookmark._id})
-
-    }catch(error){
-      return res.status(500).json({message:error.message})
-
-    }
-  },
 
   deleteBookmark: async (req,res) => {
     const bookmarkId = req.params.bookmarkId;
