@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const Skill = require('../models/Skills')
+const Skills = require('../models/Skills')
 
 module.exports = {
   updateUser: async(req,res) =>{
