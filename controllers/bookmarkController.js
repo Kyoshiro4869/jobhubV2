@@ -41,18 +41,28 @@ module.exports = {
 
   getAllBookmarks: async (req, res) => {
     const userId = req.user.id;
-
+  
     try{
+      console.log(`Getting bookmarks for user: ${userId}`); // Debug: Print the user ID
+  
       const bookmarks = await Bookmark.find({userId:userId},{createdAt:0,updatedAt:0,__v:0}).populate(
         {
            path:'job',
            select:"-requriement -description -createdAt -updatedAt -__v"
         }
       )
+  
+      console.log(`Found ${bookmarks.length} bookmarks`); // Debug: Print the number of bookmarks found
+  
+      // Debug: Print each bookmark and its associated job
+      bookmarks.forEach((bookmark, i) => {
+        console.log(`Bookmark ${i}: ${JSON.stringify(bookmark)}`);
+      });
+  
       res.status(200).json(bookmarks)
     } catch (error){
+      console.log(`Error getting bookmarks: ${error.message}`); // Debug: Print the error message
       res.status(500).json({message:error.message})
-
     }
   },
 
