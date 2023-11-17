@@ -33,7 +33,7 @@ module.exports = {
   },
 
   addSkills: async (req,res)=>{
-    const newSkill = new Skills({userId: req.usr.id,skill:req.body.skill})
+    const newSkill = new Skills({userId: req.user.id,skill:req.body.skill})
 
     try{
       await newSkill.save();
