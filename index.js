@@ -7,6 +7,7 @@ const jobRouter = require('./routes/job');
 const bodyParser = require('body-parser');
 const authRouter = require('./routes/auth');
 const bookmarkRouter = require('./routes/bookmark');
+const userRouter = require('./routes/user');
 const admin  = require('firebase-admin');
 const serviceAccount = require('./ServiceAccountKey.json');
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api/jobs',jobRouter);
+app.use('/api/users',userRouter);
 app.use('/api/bookmarks',bookmarkRouter);
 app.use('/api/',authRouter);
 
