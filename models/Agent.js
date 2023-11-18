@@ -13,4 +13,4 @@ const AgentSchema = new mongoose.Schema({
 },{timestamps : true}); // timestampsオプションは、createdAtとupdatedAtフィールドを自動的に管理
 
 
-module.exports = mongoose.model('Skill', AgentSchema);
+module.exports = mongoose.model('Agent', AgentSchema);
