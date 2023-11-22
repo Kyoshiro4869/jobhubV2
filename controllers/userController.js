@@ -126,7 +126,7 @@ module.exports = {
 
   getAgents: async (req,res) => {
     try{
-      const agents = User.aggregate([
+      const agents = await User.aggregate([
         {$match:{isAgent:true}},
         {$sample: {size:7}},
         {
