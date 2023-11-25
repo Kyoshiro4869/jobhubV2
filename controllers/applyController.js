@@ -24,8 +24,8 @@ module.exports = {
         .populate({
           path: 'job',
           select: '-createdAt -updatedAt -description -requirements -__v',
-        });
-      res.status(200).json({ applied });
+        })
+      res.status(200).json(applied);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred while getting applications' });
