@@ -29,6 +29,7 @@ app.use('/api/jobs',jobRouter);
 app.use('/api/users',userRouter);
 app.use('/api/bookmarks',bookmarkRouter);
 app.use('/api/',authRouter);
+app.use('/api/applied',require('./routes/apply'));
 
 
 app.listen(port ,() => console.log(`The Hub is listening on port ${port}!`));
